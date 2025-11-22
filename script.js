@@ -1,14 +1,14 @@
-function volume_sphere() {
-    const radiusInput = document.getElementById("radius").value;
+function volume_sphere(event) {
+    event.preventDefault();
 
-    const r = parseFloat(radiusInput);
+    const radius = parseFloat(document.getElementById("radius").value);
 
-    if (isNaN(r) || r < 0) {
-        document.getElementById("volume").value = "NaN";
+    if (isNaN(radius) || radius <= 0) {
+        alert("Please enter a valid positive radius.");
         return;
     }
 
-    const volume = (4 / 3) * Math.PI * Math.pow(r, 3);
+    const volume = (4/3) * Math.PI * Math.pow(radius, 3);
 
-    document.getElementById("volume").value = volume.toFixed(4);
+    document.getElementById("volume").value = volume.toFixed(2);
 }
