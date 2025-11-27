@@ -1,23 +1,27 @@
 function volume_sphere() {
-    // Get radius value
-    let radius = document.getElementById("radius").value;
+  // Get the raw input string
+  const raw = document.getElementById("radius").value;
 
-    // Convert to number
-    radius = parseFloat(radius);
+  // Convert to a Number (handles '', 'abc', '5' etc.)
+  const radius = Number(raw);
 
-    // Validate radius: must be a non-negative number
-    if (isNaN(radius) || radius < 0) {
-        document.getElementById("volume").value = "NaN";
-        return;
-    }
+  // Output element
+  const out = document.getElementById("volume");
 
-    // Calculate volume: V = (4/3) * π * r^3
-    let volume = (4 / 3) * Math.PI * Math.pow(radius, 3);
+  // Validate: must be a finite number and non-negative
+  if (!isFinite(radius) || radius < 0) {
+    out.value = "NaN";
+    return;
+  }
 
-    // Round to 4 decimal places
-    volume = volume.toFixed(4);
+  // Compute volume: V = (4/3) * π * r^3
+  const volume = (4 / 3) * Math.PI * Math.pow(radius, 3);
 
-    // Display result
-    document.getElementById("volume").value = volume;
+  // Round to 4 decimal places and display
+  out.value = volume.toFixed(4);
 }
+
+// Wire the button to the function
+document.getElementById("calcBtn").addEventListener("click", volume_sphere);
+
 
