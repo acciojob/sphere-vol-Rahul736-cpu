@@ -1,27 +1,23 @@
-\
+function volume_sphere() {
+    // Get radius value
+    let radius = document.getElementById("radius").value;
 
-const changeBtn = document.getElementById("change_button");
-const resetBtn = document.getElementById("Reset");
+    // Convert to number
+    radius = parseFloat(radius);
 
-// Reset all blocks
-function resetColors() {
-  const blocks = document.querySelectorAll(".grid-item");
-  blocks.forEach(block => block.style.backgroundColor = "transparent");
+    // Validate radius: must be a non-negative number
+    if (isNaN(radius) || radius < 0) {
+        document.getElementById("volume").value = "NaN";
+        return;
+    }
+
+    // Calculate volume: V = (4/3) * π * r^3
+    let volume = (4 / 3) * Math.PI * Math.pow(radius, 3);
+
+    // Round to 4 decimal places
+    volume = volume.toFixed(4);
+
+    // Display result
+    document.getElementById("volume").value = volume;
 }
 
-// Change color logic
-changeBtn.addEventListener("click", function () {
-  const blockId = document.getElementById("block_id").value;
-  const color = document.getElementById("colour_id").value;
-
-  resetColors(); // First reset all
-
-  const selectedBlock = document.getElementById(blockId);
-
-  if (selectedBlock) {
-    selectedBlock.style.backgroundColor = color;
-  }
-});
-
-// Reset button
-resetBtn.addEventListener("click", resetColors);
